@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -13,6 +13,10 @@ import s from './App.module.scss';
 
 const queryClient = new QueryClient();
 export const App = () => {
+  const [projectName] = useState(() =>
+    document.title.replace('Locale Resource Editor - ', '')
+  );
+
   return (
     <GlobalStatesProvider>
       <QueryClientProvider client={queryClient}>
@@ -22,7 +26,7 @@ export const App = () => {
               <h1>
                 <div>Locale Resource Editor</div>
                 <div>
-                  <sup>project name</sup>
+                  <sub>{projectName}</sub>
                 </div>
               </h1>
 

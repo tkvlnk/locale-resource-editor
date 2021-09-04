@@ -27,7 +27,11 @@ export const webpackConfig: webpack.Configuration = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
   },
-  plugins: [new HtmlWebpackPlugin()]
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: `Locale Resource Editor - ${getProjectName()}`
+    })
+  ]
 };
 
 function resolvePath(pathTail: string) {
@@ -38,4 +42,14 @@ function resolvePath(pathTail: string) {
   }
 
   return path.resolve(__dirname, '..', pathTail);
+}
+
+function getProjectName(): string {
+  const packageJsonPath = path.resolve(process.cwd(), 'package.json');
+
+  const content = fs.readFileSync(packageJsonPath, 'utf-8');
+
+  const packageJson = JSON.parse(content) as { name: string };
+
+  return packageJson.name;
 }
