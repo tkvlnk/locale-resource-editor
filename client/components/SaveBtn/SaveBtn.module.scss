@@ -1,0 +1,21 @@
+.root {
+  display: grid;
+
+  grid-template-columns: max-content max-content;
+  grid-gap: 1em;
+}
+
+.checkbox {
+  display: grid;
+
+  grid-template-columns: max-content max-content;
+  grid-gap: 1em;
+
+  align-items: center;
+
+  font-size: 0.75em;
+}
+
+.button {
+  width: 100%;
+}

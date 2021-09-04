@@ -6,14 +6,14 @@ export type KeysByFileName = Record<string, Record<string, string>>;
 
 export class LocaleEditorService {
   constructor(
-    private readonly keysByFileName: KeysByFileName = {},
+    private readonly data: KeysByFileName = {},
     private readonly onDataUpdate: (nextData: KeysByFileName) => void,
     private readonly onRefresh: () => Promise<KeysByFileName>,
     private readonly onSaveData: (data: KeysByFileName) => Promise<void>
   ) {}
 
   get allUniqueKeys(): string[] {
-    const allKeys = Object.values(this.keysByFileName).flatMap((value) =>
+    const allKeys = Object.values(this.data).flatMap((value) =>
       Object.keys(value)
     );
 
@@ -21,15 +21,15 @@ export class LocaleEditorService {
   }
 
   get allFileNames(): string[] {
-    return Object.keys(this.keysByFileName);
+    return Object.keys(this.data);
   }
 
   getKeyInFile(fileName: string, key: string): string {
-    return this.keysByFileName[fileName]?.[key] ?? '';
+    return this.data[fileName]?.[key] ?? '';
   }
 
   setKeyInFile(fileName: string, key: string, value: string): void {
-    const nextData = cloneDeep(this.keysByFileName);
+    const nextData = cloneDeep(this.data);
 
     if (!nextData[fileName]) {
       nextData[fileName] = {
@@ -47,7 +47,7 @@ export class LocaleEditorService {
   }
 
   getFormattedFileContents(fileName: string): string {
-    return jsonStableStringify(unflatten(this.keysByFileName[fileName]), {
+    return jsonStableStringify(unflatten(this.data[fileName]), {
       space: '  '
     });
   }
@@ -58,18 +58,18 @@ export class LocaleEditorService {
   }
 
   async uploadData({
-    shouldUnflatten
+    isNestedStructure
   }: {
-    shouldUnflatten: boolean;
+    isNestedStructure: boolean;
   }): Promise<void> {
-    const data = shouldUnflatten
+    const data = isNestedStructure
       ? (Object.fromEntries(
-          Object.entries(this.keysByFileName).map(([key, value]) => [
+          Object.entries(this.data).map(([key, value]) => [
             key,
             unflatten(value)
           ])
         ) as KeysByFileName)
-      : this.keysByFileName;
+      : this.data;
 
     await this.onSaveData(data);
   }

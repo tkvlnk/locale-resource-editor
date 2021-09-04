@@ -2,28 +2,39 @@ import React from 'react';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
 
+import { GlobalStatesProvider } from '../../hooks/useGlobalStates';
 import { LocalesEditorProvider } from '../../hooks/useLocalesEditor';
 
+import { HideCompletedToggle } from '../HideCompletedToggle/HideCompletedToggle';
 import { KeysList } from '../KeysList/KeysList';
+import { SaveBtn } from '../SaveBtn/SaveBtn';
+
+import s from './App.module.scss';
 
 const queryClient = new QueryClient();
-
 export const App = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <LocalesEditorProvider>
-        <div>
-          <p>Locale Resource Editor</p>
+    <GlobalStatesProvider>
+      <QueryClientProvider client={queryClient}>
+        <LocalesEditorProvider>
+          <div className={s.root}>
+            <header className={s.header}>
+              <h1>
+                <div>Locale Resource Editor</div>
+                <div>
+                  <sup>project name</sup>
+                </div>
+              </h1>
 
-          {/* <FilesPicker /> */}
-        </div>
+              <SaveBtn />
 
-        <div>{/* <ExportSection /> */}</div>
+              <HideCompletedToggle />
+            </header>
 
-        <div>
-          <KeysList />
-        </div>
-      </LocalesEditorProvider>
-    </QueryClientProvider>
+            <KeysList />
+          </div>
+        </LocalesEditorProvider>
+      </QueryClientProvider>
+    </GlobalStatesProvider>
   );
 };

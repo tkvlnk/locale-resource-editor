@@ -1,0 +1,6 @@
+.root {
+  display: inline-grid;
+
+  grid-template-columns: max-content max-content;
+  grid-gap: 1em;
+}

@@ -1,0 +1,11 @@
+.root {
+  display: grid;
+
+  grid-template-columns: 1fr;
+  grid-gap: 1em;
+}
+
+.emty {
+  font-size: 0.75em;
+  text-align: center;
+}

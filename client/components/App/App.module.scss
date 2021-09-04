@@ -1,3 +1,25 @@
-.text {
-  color: red;
+.root {
+  display: grid;
+
+  grid-gap: 2em;
+
+  padding-bottom: 3em;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+
+  display: grid;
+
+  grid-template-columns: 1fr max-content;
+  grid-gap: 1em;
+
+  align-items: start;
+
+  padding: 1em 0;
+
+  background-color: var(--bgn-color);
+
+  box-shadow: 0 1em 1em var(--bgn-color);
 }

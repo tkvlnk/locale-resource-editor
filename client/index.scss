@@ -1,0 +1,92 @@
+@import "~normalize.css/normalize.css";
+
+body {
+  margin: 0;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  > * {
+    min-width: 480px;
+    max-width: 1024px;
+    padding: 0 2em;
+    margin: auto;
+  }
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+input,
+textarea,
+select {
+  box-sizing: border-box;
+  display: inline-block;
+
+  width: 100%;
+  padding: 0.25em;
+}
+
+button {
+  display: inline-flex;
+
+  align-content: center;
+
+  width: 100%;
+  padding: 0.25em 1em;
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+
+  width: 1em;
+  height: 1em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+}
+
+:root {
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    --bgn-color: #fff;
+    --txt-color: #333;
+
+    color: var(--txt-color);
+
+    background: var(--bgn-color);
+  }
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    --bgn-color: #333;
+    --txt-color: #fff;
+
+    color: var(--txt-color);
+
+    background: var(--bgn-color);
+  }
+}
+
+fieldset {
+  border-width: 1px;
+}
+
+summary {
+  cursor: default;
+}

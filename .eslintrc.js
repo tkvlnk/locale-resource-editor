@@ -6,6 +6,7 @@ module.exports = {
   },
   rules: {
     'import/prefer-default-export': 0,
-    'import/no-default-export': 1
+    'import/no-default-export': 1,
+    'jsx-a11y/accessible-emoji': 0
   }
 };

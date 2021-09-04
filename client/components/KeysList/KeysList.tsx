@@ -1,47 +1,64 @@
-import React, { useState } from 'react';
+import React, { useMemo } from 'react';
 
+import { useRecoilValue } from 'recoil';
+
+import { useGlobalStates } from '../../hooks/useGlobalStates';
 import { useLocalesEditor } from '../../hooks/useLocalesEditor';
 import { LocaleValueEditor } from '../LocaleValueEditor/LocaleValueEditor';
+
+import s from './KeysList.module.scss';
 
 export const KeysList = () => {
   const localesData = useLocalesEditor();
 
-  const [hideCompleted, setHideCompleted] = useState(false);
+  const hideCompleted = useRecoilValue(useGlobalStates().hideCompleted);
+
+  const localeKeys = useMemo(
+    () =>
+      localesData.allUniqueKeys.filter((localeKey) => {
+        if (!hideCompleted) {
+          return true;
+        }
+
+        return localesData.allFileNames.some(
+          (fileName) => !localesData.getKeyInFile(fileName, localeKey)
+        );
+      }),
+    [hideCompleted] // eslint-disable-line react-hooks/exhaustive-deps
+  );
 
   return (
-    <div>
-      <button
-        type="button"
-        onClick={() => localesData.uploadData({ shouldUnflatten: true })}
-      >
-        Save!
-      </button>
-
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={hideCompleted}
-            onChange={(event) => setHideCompleted(event.target.checked)}
-          />
-          <span>Hide completed</span>
-        </label>
-      </div>
-      <div>
-        {localesData.allUniqueKeys
-          .filter((localeKey) => {
-            if (!hideCompleted) {
-              return true;
-            }
-
-            return localesData.allFileNames.some(
-              (fileName) => !localesData.getKeyInFile(fileName, localeKey)
-            );
-          })
-          .map((localeKey) => (
-            <LocaleValueEditor key={localeKey} localeKey={localeKey} />
-          ))}
-      </div>
+    <div className={s.root}>
+      {localeKeys.length > 0 ? (
+        localeKeys.map((localeKey) => (
+          <LocaleValueEditor key={localeKey} localeKey={localeKey} />
+        ))
+      ) : (
+        <div className={s.emty}>There is no translation keys 👀</div>
+      )}
     </div>
   );
 };
+
+/*
+.sort((leftKey, rightKey) => {
+  const leftValue = localesData.allFileNames
+    .map((fileName) => localesData.getKeyInFile(fileName, leftKey))
+    .filter(Boolean).length;
+
+  const rightValues = localesData.allFileNames
+    .map((fileName) => localesData.getKeyInFile(fileName, rightKey))
+    .filter(Boolean).length;
+
+  return leftValue - rightValues;
+})
+.filter((localeKey) => {
+  if (!hideCompleted) {
+    return true;
+  }
+
+  return localesData.allFileNames.some(
+    (fileName) => !localesData.getKeyInFile(fileName, localeKey)
+  );
+})
+*/
