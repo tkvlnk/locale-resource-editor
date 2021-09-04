@@ -5,7 +5,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
 
 export const webpackConfig: webpack.Configuration = {
-  entry: findEntry(),
+  entry: resolvePath('./client/index.tsx'),
   devtool: 'inline-source-map',
   stats: 'errors-only',
   mode: 'production',
@@ -14,7 +14,7 @@ export const webpackConfig: webpack.Configuration = {
       {
         test: /\.tsx?$/,
         use: require.resolve('ts-loader'),
-        exclude: /node_modules/
+        include: resolvePath('./client')
       },
       {
         test: /\.s?css$/,
@@ -30,13 +30,12 @@ export const webpackConfig: webpack.Configuration = {
   plugins: [new HtmlWebpackPlugin()]
 };
 
-function findEntry() {
-  const pathTail = './client/index.tsx';
+function resolvePath(pathTail: string) {
   const result = path.resolve(__dirname, pathTail);
 
   if (fs.existsSync(result)) {
     return result;
   }
 
-  return path.resolve(path.resolve(__dirname, '../'), pathTail);
+  return path.resolve(__dirname, '..', pathTail);
 }
