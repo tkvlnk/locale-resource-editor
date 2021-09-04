@@ -5,7 +5,7 @@
   "author": "Tit Kovalenko",
   "license": "NO LICENCE",
   "bin": {
-    "lre": "./dist/cli.js"
+    "lre": "./bin.js"
   },
   "scripts": {
     "start": "ts-node bootstrap.ts",
