@@ -39,7 +39,7 @@ export const KeysList = () => {
             );
           })
           .map((localeKey) => (
-            <LocaleValueEditor localeKey={localeKey} />
+            <LocaleValueEditor key={localeKey} localeKey={localeKey} />
           ))}
       </div>
     </div>

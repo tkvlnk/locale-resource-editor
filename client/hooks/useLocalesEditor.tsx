@@ -1,12 +1,13 @@
 import constate from 'constate';
-import { flatten } from 'flat';
 import React, { useState } from 'react';
-import { useMutation, useQuery } from 'react-query';
 
 import {
   KeysByFileName,
   LocaleEditorService
 } from '../services/LocaleEditorService';
+
+import { useLoadSources } from './useLoadSources';
+import { useSaveSources } from './useSaveSources';
 
 const [RawProvider, useLocalesEditor] = constate(
   ({
@@ -25,28 +26,9 @@ const [RawProvider, useLocalesEditor] = constate(
 );
 
 const LocalesEditorProvider: React.FC = ({ children }) => {
-  const { data, isLoading, refetch } = useQuery(
-    'source-files',
-    async (): Promise<KeysByFileName> => {
-      const fromServer = await fetch('/sources').then((r) => r.json());
-      return Object.fromEntries(
-        Object.entries(fromServer).map(([key, value]) => [key, flatten(value)])
-      );
-    }
-  );
+  const { data, isLoading, refetch } = useLoadSources();
 
-  const { mutateAsync } = useMutation(
-    'update-source-files',
-    async (nextData: KeysByFileName) => {
-      await fetch('/sources', {
-        method: 'post',
-        body: JSON.stringify(nextData),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-    }
-  );
+  const { mutateAsync } = useSaveSources();
 
   if (isLoading || !data) {
     return <div />;
