@@ -9,6 +9,8 @@ import { HideCompletedToggle } from '../HideCompletedToggle/HideCompletedToggle'
 import { KeysList } from '../KeysList/KeysList';
 import { SaveBtn } from '../SaveBtn/SaveBtn';
 
+import { SearchByKey } from '../SearchByKey/SearchByKey';
+
 import s from './App.module.scss';
 
 const queryClient = new QueryClient();
@@ -23,16 +25,16 @@ export const App = () => {
         <LocalesEditorProvider>
           <div className={s.root}>
             <header className={s.header}>
-              <h1>
-                <div>Locale Resource Editor</div>
-                <div>
-                  <sub>{projectName}</sub>
-                </div>
-              </h1>
+              <h1>Locale Resource Editor: {projectName}</h1>
 
-              <SaveBtn />
+              <div className={s.save}>
+                <SaveBtn />
+              </div>
 
-              <HideCompletedToggle />
+              <div className={s.search}>
+                <SearchByKey />
+                <HideCompletedToggle />
+              </div>
             </header>
 
             <KeysList />

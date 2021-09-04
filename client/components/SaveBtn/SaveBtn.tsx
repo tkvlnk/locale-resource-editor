@@ -41,7 +41,7 @@ export function SaveBtn() {
           }
         }}
       >
-        Save Files
+        Save
       </button>
     </div>
   );

@@ -13,13 +13,26 @@
   display: grid;
 
   grid-template-columns: 1fr max-content;
-  grid-gap: 1em;
+  grid-gap: 2em;
 
-  align-items: start;
+  align-items: center;
 
   padding: 1em 0;
 
   background-color: var(--bgn-color);
 
   box-shadow: 0 1em 1em var(--bgn-color);
+}
+
+.save {
+  align-self: start;
+}
+
+.search {
+  display: grid;
+
+  grid-column: 1 / span 2;
+  grid-gap: 1em;
+
+  max-width: 20em;
 }

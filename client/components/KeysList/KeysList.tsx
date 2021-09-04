@@ -12,19 +12,26 @@ export const KeysList = () => {
   const localesData = useLocalesEditor();
 
   const hideCompleted = useRecoilValue(useGlobalStates().hideCompleted);
+  const searchKeyQuery = useRecoilValue(useGlobalStates().searchKeyQuery);
 
   const localeKeys = useMemo(
     () =>
-      localesData.allUniqueKeys.filter((localeKey) => {
-        if (!hideCompleted) {
-          return true;
-        }
+      localesData.allUniqueKeys
+        .filter((localeKey) => {
+          if (!hideCompleted) {
+            return true;
+          }
 
-        return localesData.allFileNames.some(
-          (fileName) => !localesData.getKeyInFile(fileName, localeKey)
-        );
-      }),
-    [hideCompleted] // eslint-disable-line react-hooks/exhaustive-deps
+          return localesData.allFileNames.some(
+            (fileName) => !localesData.getKeyInFile(fileName, localeKey)
+          );
+        })
+        .filter((localeKey) =>
+          localeKey
+            .toLocaleUpperCase()
+            .includes(searchKeyQuery.toLocaleUpperCase())
+        ),
+    [hideCompleted, searchKeyQuery] // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   return (
