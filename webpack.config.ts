@@ -7,8 +7,8 @@ import webpack from 'webpack';
 export const webpackConfig: webpack.Configuration = {
   entry: resolvePath('./client/index.tsx'),
   devtool: 'inline-source-map',
-  stats: 'errors-only',
-  mode: 'development',
+  stats: 'none',
+  mode: 'production',
   module: {
     rules: [
       {

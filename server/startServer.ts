@@ -39,7 +39,8 @@ export function startServer(params: Params): Promise<void> {
 
   return new Promise((resolve) => {
     app.listen(port, () => {
-      console.log(`🚀 Example app listening on port ${port}!`); // eslint-disable-line no-console
+      console.log(`🌍 Locale Resources Editor listening on ${port}!\n`); // eslint-disable-line no-console
+      console.log(`http://localhost:${port}`); // eslint-disable-line no-console
       resolve();
     });
   });
