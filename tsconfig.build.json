@@ -5,5 +5,5 @@
     "target": "ES6",
     "outDir": "./dist/"
   },
-  "files": ["cli.ts"]
+  "include": ["cli.ts", "webpack.config.ts", "server"]
 }
