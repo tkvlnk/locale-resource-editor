@@ -9,9 +9,16 @@
   },
   "scripts": {
     "start": "ts-node bootstrap.ts",
-    "test": "jest",
+    "test": "yarn run typecheck && yarn run lint && jest",
     "build": "tsc -p tsconfig.build.json",
-    "postinstall": "yarn build"
+    "postinstall": "yarn build",
+    "typecheck": "tsc --noEmit",
+    "lint": "yarn run lint:style && yarn run lint:code",
+    "lint:fix": "yarn run lint:style:fix && yarn run lint:code:fix",
+    "lint:code": "eslint \"**/*.{ts,tsx}\" --max-warnings 0",
+    "lint:code:fix": "yarn run lint:code --fix",
+    "lint:style": "stylelint \"src/**/*.{css,scss}\"",
+    "lint:style:fix": "yarn run lint:style --fix"
   },
   "dependencies": {
     "@tkvlnk/configs": "git+https://github.com/tkvlnk/configs.git#2.1.7",
@@ -32,6 +39,7 @@
     "file-saver": "^2.0.5",
     "flat": "^5.0.2",
     "html-webpack-plugin": "^5.3.2",
+    "identity-obj-proxy": "^3.0.0",
     "json-stable-stringify": "^1.0.1",
     "lodash.clonedeep": "^4.5.0",
     "normalize.css": "^8.0.1",
