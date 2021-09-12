@@ -3,7 +3,7 @@
 
 This package provides a way to comfortably review and edit your localisation resources.
 
-![img.png](docs/img.png)
+![Screenshot](https://raw.githubusercontent.com/tkvlnk/locale-resource-editor/master/docs/img.png)
 
 ## CLI
 
