@@ -17,7 +17,7 @@
     "lint:fix": "yarn run lint:style:fix && yarn run lint:code:fix",
     "lint:code": "eslint \"**/*.{ts,tsx}\" --max-warnings 0",
     "lint:code:fix": "yarn run lint:code --fix",
-    "lint:style": "stylelint \"src/**/*.{css,scss}\"",
+    "lint:style": "stylelint \"**/*.{css,scss}\"",
     "lint:style:fix": "yarn run lint:style --fix"
   },
   "dependencies": {
