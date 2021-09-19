@@ -21,7 +21,7 @@
   ],
   "license": "MIT",
   "bin": {
-    "lre": "./bin.js"
+    "lre": "bin.ts"
   },
   "scripts": {
     "start": "ts-node bootstrap.ts",
